@@ -4,8 +4,8 @@ As the name implies, this is a quick start example to show the use of [WebApi][2
 
 Unlike many examples, this one contains two projects :
 
-* **Host**: [OWIN][1] Self Host (console app) - does not contains any no application logic!
 * **WebApiLib** : application domain (exposed through [WebApi][2] controllers)
+* **Host**: [OWIN][1] Self Host (console app) - does not contains any no application logic!
 
 In the OWIN terminology : 
 
