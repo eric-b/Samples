@@ -36,15 +36,11 @@ namespace RsaRijndaelWebApi.Infrastructure.Cryptography
 
         public RsaRijndaelWebApi.Infrastructure.Cryptography.IRijndaelEncryptor CreateDataEncryptor(byte[] key, byte[] vector)
         {
-            if (_rijndaelManaged == null)
-                throw new InvalidOperationException("Opération non supportée dans l'état courant de cet objet.");
             return new RsaRijndaelWebApi.Infrastructure.Cryptography.Rijndael(_rijndaelManaged.CreateEncryptor(key, vector));
         }
 
         public RsaRijndaelWebApi.Infrastructure.Cryptography.IRijndaelDecryptor CreateDataDecryptor(byte[] key, byte[] vector)
         {
-            if (_rijndaelManaged == null)
-                throw new InvalidOperationException("Opération non supportée dans l'état courant de cet objet.");
             return new RsaRijndaelWebApi.Infrastructure.Cryptography.Rijndael(_rijndaelManaged.CreateDecryptor(key, vector));
         }
 
@@ -53,9 +49,9 @@ namespace RsaRijndaelWebApi.Infrastructure.Cryptography
             return _rsa.Decrypt(key);
         }
 
-        public byte[] EncryptKey(byte[] data)
+        public byte[] EncryptKey(byte[] key)
         {
-            return _rsa.Encrypt(data);
+            return _rsa.Encrypt(key);
         }
 
         public void Dispose()
