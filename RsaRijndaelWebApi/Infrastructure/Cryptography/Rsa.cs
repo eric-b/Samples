@@ -31,8 +31,8 @@ namespace RsaRijndaelWebApi.Infrastructure.Cryptography
 
         public byte[] Encrypt(byte[] data)
         {
-            if (_rsaPrivate == null)
-                throw new InvalidOperationException("Aucune clé n'a été spécifiée.");
+            if (data == null)
+                throw new ArgumentNullException("data");
             return _rsaPrivate.Encrypt(data, true);
         }
 

@@ -5,7 +5,7 @@ using RsaRijndaelWebApi.Infrastructure.ActionFilters;
 
 namespace RsaRijndaelWebApi.Controllers
 {
-    [InternalActionFilterAttribute]
+    [InternalActionFilter]
     public class SayHelloController : ApiController
     {
         // GET /api/SayHello/id
