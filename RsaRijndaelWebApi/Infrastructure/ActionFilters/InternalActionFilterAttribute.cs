@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using RsaRijndaelWebApi.Infrastructure.Cryptography;
@@ -11,6 +12,8 @@ namespace RsaRijndaelWebApi.Infrastructure.ActionFilters
 {
     public class InternalActionFilterAttribute : ActionFilterAttribute
     {
+        private readonly static MediaTypeHeaderValue ApplicationOctetStreamMimeType = new MediaTypeHeaderValue("application/octet-stream");
+
         public const string HeaderKey = "X-Key";
 
         public const string HeaderIV = "X-IV";
@@ -67,6 +70,12 @@ namespace RsaRijndaelWebApi.Infrastructure.ActionFilters
         {
             if (actionExecutedContext.Response.IsSuccessStatusCode && actionExecutedContext.Response.Content != null)
             {
+                if (actionExecutedContext.Response.Content.Headers.ContentType != null && actionExecutedContext.Response.Content.Headers.ContentType.MediaType != ApplicationOctetStreamMimeType.MediaType)
+                {
+                    actionExecutedContext.Response = actionExecutedContext.Request.CreateResponse(HttpStatusCode.NotAcceptable);
+                    return;
+                }
+
                 HttpContent originalContent = actionExecutedContext.Response.Content;
                 long? contentLength = originalContent.Headers.ContentLength;
 
@@ -89,6 +98,7 @@ namespace RsaRijndaelWebApi.Infrastructure.ActionFilters
                                 originalContent.CopyToAsync(originalContentStream);
                                 originalContentStream.Position = 0;
                                 actionExecutedContext.Response.Content = new ByteArrayContent(encryptor.Encrypt(originalContentStream));
+                                actionExecutedContext.Response.Content.Headers.ContentType = ApplicationOctetStreamMimeType;
                             }
                         }
                     }

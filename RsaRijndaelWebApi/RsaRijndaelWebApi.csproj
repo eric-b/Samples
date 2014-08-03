@@ -91,6 +91,7 @@
     <Compile Include="Infrastructure\AppStartup\IocInitializer.cs" />
     <Compile Include="Infrastructure\AppStartup\OwinAppStartup.cs" />
     <Compile Include="Infrastructure\AppStartup\WebApiConfig.cs" />
+    <Compile Include="Infrastructure\Formatters\BinaryMediaTypeFormatter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\Cryptography\IRijndaelDecryptor.cs" />

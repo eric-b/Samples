@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Net;
 using System.Text;
 using Microsoft.Owin.Hosting;
 using RsaRijndaelWebApi.Infrastructure.Cryptography;
@@ -24,24 +25,31 @@ namespace RsaRijndaelWebApi
                 var rijndaelKey = cipher.GenerateKey();
                 client.DefaultRequestHeaders.Add(Infrastructure.ActionFilters.InternalActionFilterAttribute.HeaderKey, Convert.ToBase64String(publicRsa.Encrypt(rijndaelKey.key)));
                 client.DefaultRequestHeaders.Add(Infrastructure.ActionFilters.InternalActionFilterAttribute.HeaderIV, Convert.ToBase64String(publicRsa.Encrypt(rijndaelKey.IV)));
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/octet-stream"));
                 
                 using (var encryptor = cipher.CreateDataEncryptor(rijndaelKey.key, rijndaelKey.IV))
                 {
                     const string sampleName = "Smith";
-                    var requestUri = string.Format("{0}api/SayHello/{1}", baseAddress, Convert.ToBase64String(encryptor.Encrypt(Encoding.UTF8.GetBytes(sampleName))));
+                    var requestUri = string.Format("{0}api/SayHello/?id={1}", baseAddress, WebUtility.UrlEncode(Convert.ToBase64String(encryptor.Encrypt(Encoding.UTF8.GetBytes(sampleName)))));
                     Console.WriteLine("GET {0} ...", requestUri);
                     var response = client.GetAsync(requestUri).Result;
-
-                    var content = response.Content.ReadAsByteArrayAsync().Result;
-
-                    using (var decryptor = cipher.CreateDataDecryptor(rijndaelKey.key, rijndaelKey.IV))
+                    if (response.IsSuccessStatusCode)
                     {
-                        var decipheredContent = Encoding.UTF8.GetString(decryptor.Decrypt(content));
-                        Console.WriteLine("{0}\r\n{1}", response, decipheredContent);
+                        var content = response.Content.ReadAsByteArrayAsync().Result;
 
-                        System.Diagnostics.Debug.Assert(
-                            decipheredContent == string.Format("\"Hello {0}\"", sampleName), 
-                            string.Format("Unexpected result: {0}", decipheredContent));
+                        using (var decryptor = cipher.CreateDataDecryptor(rijndaelKey.key, rijndaelKey.IV))
+                        {
+                            var decipheredContent = Encoding.UTF8.GetString(decryptor.Decrypt(content));
+                            Console.WriteLine("{0}\r\n{1}", response, decipheredContent);
+
+                            System.Diagnostics.Debug.Assert(
+                                decipheredContent == string.Format("Hello {0}", sampleName),
+                                string.Format("Unexpected result: {0}", decipheredContent));
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: HTTP {0}", response.StatusCode);
                     }
                 }
                 Console.ReadKey(true);
