@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Cross-domain file upload demo</title>
+</head>
+<body>
+    <a href="/UploadPage/form">Simple Form</a>
+
+    <h3>jQuery File Upload</h3>
+
+    <!-- See https://github.com/blueimp/jQuery-File-Upload/wiki/Basic-plugin -->    
+    <input id="fileupload" type="file" name="files[]" data-url="{server2-base-address}upload" multiple="multiple" />
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.js"></script>
+    <script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
+    <script src="http://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload.js"></script>
+
+    <script>
+        $(function () {
+            $('#fileupload').fileupload({
+                dataType: 'json',
+                // forceIframeTransport: for test purpose
+                forceIframeTransport: true,
+                redirect: '{server1-base-address}uploadPage/result?%s',
+                done: function (e, data) {
+                    $.each(data.result, function (index, file) {
+                        $('<p/>').text(file.Content).appendTo(document.body);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
