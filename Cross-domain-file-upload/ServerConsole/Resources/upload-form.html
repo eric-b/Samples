@@ -10,12 +10,14 @@
     
     <h3>Simple Form</h3>
 
-    <form method="post" action="{server2-base-address}upload" name="submit" enctype="multipart/form-data">
+    <form method="post" action="{server2-base-address}upload" name="submit" enctype="multipart/form-data" target="iframe1">
       <input type="file" name="file" />
       <input type="submit" name="submit" value="Upload" />
         <!--[if IE]>
         <input type="hidden" name="redirect" value="{server1-base-address}uploadPage/result?%s" />
         <![endif]-->
     </form>
+
+    <iframe src="#" name="iframe1" id="iframe1"></iframe>
 </body>
 </html>
