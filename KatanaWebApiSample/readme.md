@@ -14,7 +14,7 @@ In the OWIN terminology :
 * WebApi is a *Web Framework*
 * and, for the sake of example, we use [CacheCow][4] as a *Middleware*.
 
-Blog post (in french) : [http://blog.eric-bml.net/2014/06/self-host-web-api-2-avec-owin-katana.html](http://blog.eric-bml.net/2014/06/self-host-web-api-2-avec-owin-katana.html)
+Blog post (in french) : http://blog.eric-bml.net/self-host-web-api-2-avec-owin-katana
 
 [1]: http://owin.org/#spec "OWIN spec"
 [2]: http://www.asp.net/web-api "ASP.NET Web Api"
