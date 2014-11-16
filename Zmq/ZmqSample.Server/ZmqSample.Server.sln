@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmqSample.Server", "ZmqSample.Server.csproj", "{DAE72D23-2CAA-4E75-8EFB-4DF88F1EB7C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmqSample.Client", "..\ZmqSample.Client\ZmqSample.Client.csproj", "{01564195-91BF-4612-A293-7DCC9AADA2EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmqSample.Console", "..\ZmqSample.Console\ZmqSample.Console.csproj", "{F4BFC551-3B90-4CDB-A9EB-39FBDC405AD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DAE72D23-2CAA-4E75-8EFB-4DF88F1EB7C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAE72D23-2CAA-4E75-8EFB-4DF88F1EB7C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAE72D23-2CAA-4E75-8EFB-4DF88F1EB7C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAE72D23-2CAA-4E75-8EFB-4DF88F1EB7C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01564195-91BF-4612-A293-7DCC9AADA2EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01564195-91BF-4612-A293-7DCC9AADA2EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01564195-91BF-4612-A293-7DCC9AADA2EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01564195-91BF-4612-A293-7DCC9AADA2EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4BFC551-3B90-4CDB-A9EB-39FBDC405AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4BFC551-3B90-4CDB-A9EB-39FBDC405AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4BFC551-3B90-4CDB-A9EB-39FBDC405AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4BFC551-3B90-4CDB-A9EB-39FBDC405AD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
