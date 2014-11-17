@@ -20,8 +20,6 @@ namespace ZmqSample.Client
         {
             if (string.IsNullOrEmpty(address))
                 throw new ArgumentNullException("address");
-            if (string.IsNullOrEmpty(address))
-                throw new ArgumentNullException("filter");
             _context = NetMQContext.Create();
             _backgroundSocketTaskCts = new CancellationTokenSource();
             _backgroundSocketTask = new Task(ListenSocket, _backgroundSocketTaskCts.Token, _backgroundSocketTaskCts.Token, TaskCreationOptions.LongRunning);
@@ -55,7 +53,7 @@ namespace ZmqSample.Client
             {
                 using (var socket = _context.CreateSubscriberSocket())
                 {
-                    socket.Subscribe(_filter);
+                    socket.Subscribe(_filter ?? string.Empty);
                     socket.Connect(_connectAddress);
                     Console.WriteLine("Subscriber {1}: connected to {0}", _connectAddress, _filter);
                     byte[] buffer;
