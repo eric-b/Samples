@@ -30,16 +30,17 @@ namespace DisruptorSamples.OrderedConsumersProcessor
             _started = true;
         }
 
-        public void Publish(string filepath)
+        public bool Publish(string filepath)
         {
-            if (_disposeCount != 0)
-                throw new ObjectDisposedException(this.GetType().Name);
-            if (!_started)
-                throw new InvalidOperationException("Method Start() must be called before this method.");
-            if (string.IsNullOrEmpty(filepath))
-                throw new ArgumentNullException("filepath");
             long seqNo;
-            seqNo = _ringBuffer.Next();
+            try
+            {
+                seqNo = _ringBuffer.Next(TimeSpan.FromMilliseconds(500));
+            }
+            catch(TimeoutException)
+            {
+                return false;
+            }
             try
             {
                 Event entry = _ringBuffer[seqNo];
@@ -49,6 +50,7 @@ namespace DisruptorSamples.OrderedConsumersProcessor
             {
                 _ringBuffer.Publish(seqNo);
             }
+            return true;
         }
 
         void IDisposable.Dispose()

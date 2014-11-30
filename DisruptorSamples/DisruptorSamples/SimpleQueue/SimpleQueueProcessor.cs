@@ -65,7 +65,7 @@ namespace DisruptorSamples.SimpleQueue
                         Path.GetFileName(data.Filepath),
                         CompressionLevel.Optimal);
                 }
-                Console.WriteLine(string.Format("ZIP created: {0}", zipPath));
+                Console.WriteLine(string.Format("{1:HH:mm:ss.fff}: ZIP created: {0}", zipPath, DateTime.Now));
             }
             catch (Exception ex)
             {

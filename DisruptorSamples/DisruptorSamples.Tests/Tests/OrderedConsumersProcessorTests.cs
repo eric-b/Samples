@@ -27,7 +27,7 @@ namespace DisruptorSamples.Tests.Tests
                 proc.Start();
                 foreach (var path in filesSample)
                 {
-                    Console.WriteLine("{1:HH:mm:ss.fff}: Publish file: {0}.", path, DateTime.Now);
+                    Console.WriteLine("{1:HH:mm:ss.fff}: Publishing file: {0}.", path, DateTime.Now);
                     proc.Publish(path);
                 }
             }
