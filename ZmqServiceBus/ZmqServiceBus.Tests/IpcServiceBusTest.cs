@@ -92,7 +92,6 @@ namespace ZmqServiceBus.Tests
                             };
 
                             publisher = bus.CreatePublisher();
-                            Thread.Sleep(1000);
                             var eventToSend = new TestEvent() { SendTimeTicks = DateTime.UtcNow.Ticks };
 
                             Stopwatch watch = Stopwatch.StartNew();
@@ -100,7 +99,7 @@ namespace ZmqServiceBus.Tests
                             {
                                 publisher.Publish(testEventCode, eventToSend);
                             }
-                            signal.WaitOne(30000);
+                            signal.WaitOne(5000);
                             watch.Stop();
                             Assert.AreEqual(eventCount, messageReceivedCount, "messageReceivedCount unexpected.");
                             Logger.Debug("Delay between first send/last rec: {0:F02} ms. (ticks: {1}).", watch.ElapsedMilliseconds, watch.ElapsedTicks);
