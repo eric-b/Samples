@@ -8,7 +8,7 @@ namespace Identity2.Sample1.WebHost.Infrastructure.Identity
 {
     public class FakeUserStore : IUserStore<UserIdentity, int>, IUserRoleStore<UserIdentity, int>
     {
-        private List<UserIdentity> _users = new List<UserIdentity>();
+        private readonly List<UserIdentity> _users = new List<UserIdentity>();
 
         public void Dispose()
         {

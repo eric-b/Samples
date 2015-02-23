@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
+using Identity2.Sample1.Shared.Owin;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
-using Microsoft.Owin.Logging;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.DataHandler;
-using Microsoft.Owin.Security.OAuth;
 using Owin;
-using Identity2.Sample1.Shared.Owin;
 
 [assembly: OwinStartup(typeof(Identity2.Sample1.WebHost.OwinStartup))]
 

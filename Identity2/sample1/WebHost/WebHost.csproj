@@ -83,6 +83,7 @@
     <Reference Include="SimpleInjector.Integration.Web.Mvc">
       <HintPath>..\packages\SimpleInjector.Integration.Web.Mvc.2.7.2\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -184,6 +185,7 @@
     <Compile Include="Infrastructure\Identity\ApplicationUserManager.cs" />
     <Compile Include="Infrastructure\Identity\FakeUserStore.cs" />
     <Compile Include="Infrastructure\Identity\UserIdentity.cs" />
+    <Compile Include="Infrastructure\Ldap\AdAuthClient.cs" />
     <Compile Include="Infrastructure\Ldap\FakeLdapAuthClient.cs" />
     <Compile Include="Infrastructure\Ldap\ILdapAuthClient.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
