@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmqReqRep.Server", "ZmqReqRep.Server.csproj", "{669A2AF0-42ED-41D8-80D1-CA076B4E5D03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmqReqRep.Client", "..\ZmqReqRep.Client\ZmqReqRep.Client.csproj", "{A502444E-C75B-4BDC-936B-C1733616B5CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmqReqRep.Common", "..\ZmqReqRep.Common\ZmqReqRep.Common.csproj", "{AA445627-00CF-4715-9B3D-28D5BB0C2035}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmqReqRep.Tests", "..\ZmqReqRep.Tests\ZmqReqRep.Tests.csproj", "{A3F68A5C-6D62-4131-B9BE-426BB63F9E34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZmqReqRep.WebApiServer", "..\ZmqReqRep.WebApiServer\ZmqReqRep.WebApiServer.csproj", "{03BA2092-7418-419C-B2E2-23494198EAD0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{669A2AF0-42ED-41D8-80D1-CA076B4E5D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{669A2AF0-42ED-41D8-80D1-CA076B4E5D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{669A2AF0-42ED-41D8-80D1-CA076B4E5D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{669A2AF0-42ED-41D8-80D1-CA076B4E5D03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A502444E-C75B-4BDC-936B-C1733616B5CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A502444E-C75B-4BDC-936B-C1733616B5CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A502444E-C75B-4BDC-936B-C1733616B5CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A502444E-C75B-4BDC-936B-C1733616B5CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA445627-00CF-4715-9B3D-28D5BB0C2035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA445627-00CF-4715-9B3D-28D5BB0C2035}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA445627-00CF-4715-9B3D-28D5BB0C2035}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA445627-00CF-4715-9B3D-28D5BB0C2035}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3F68A5C-6D62-4131-B9BE-426BB63F9E34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3F68A5C-6D62-4131-B9BE-426BB63F9E34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3F68A5C-6D62-4131-B9BE-426BB63F9E34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3F68A5C-6D62-4131-B9BE-426BB63F9E34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03BA2092-7418-419C-B2E2-23494198EAD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03BA2092-7418-419C-B2E2-23494198EAD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03BA2092-7418-419C-B2E2-23494198EAD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03BA2092-7418-419C-B2E2-23494198EAD0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
