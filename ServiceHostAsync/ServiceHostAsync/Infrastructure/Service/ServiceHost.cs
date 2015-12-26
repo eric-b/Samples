@@ -109,7 +109,7 @@ namespace ServiceHostAsync.Infrastructure
             {
                 try
                 {
-                    OnStop();
+                    base.Stop();
                 }
                 catch (Exception ex)
                 {
@@ -139,7 +139,7 @@ namespace ServiceHostAsync.Infrastructure
             {
                 _logger.Error(ex, "Error while starting service.");
                 _isStoppingOnException = true;
-                ThreadPool.QueueUserWorkItem(o => OnStop());
+                ThreadPool.QueueUserWorkItem(o => base.Stop());
             }
             ThreadPool.RegisterWaitForSingleObject(_stopAsyncTrigger, new WaitOrTimerCallback((state, timedOut) =>
             {
