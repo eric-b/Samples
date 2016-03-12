@@ -1,0 +1,1 @@
+See blog post (in french): http://blog.eric-bml.net/hashed-stream
