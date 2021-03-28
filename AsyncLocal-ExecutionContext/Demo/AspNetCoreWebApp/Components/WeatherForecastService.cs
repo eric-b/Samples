@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AspNetCoreWebApp.Utility;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace AspNetCoreWebApp.Components
 
         public WeatherForecastService(ILogger<WeatherForecastService> logger)
         {
-            _timer = new Timer(TimerCallback, null, Timeout.Infinite, Timeout.Infinite);
+            _timer = NonCapturingTimer.Create(TimerCallback, null, Timeout.InfiniteTimeSpan, Timeout.InfiniteTimeSpan);
             _logger = logger;
             _forecastSync = new SemaphoreSlim(initialCount: 1, maxCount: 1);
             _forecast = new List<Model.WeatherForecast>();
