@@ -1,0 +1,40 @@
+# See https://learn.microsoft.com/en-us/azure/service-bus-messaging/test-locally-with-service-bus-emulator?tabs=docker-linux-container
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: azure-sb-emulator-config
+  namespace: ${namespace}
+  labels:
+    app.kubernetes.io/name: azure-sb-emulator
+data:
+  config.json: |
+    {
+      "UserConfig": {
+        "Namespaces": [
+          {
+            "Name": "sbemulatorns",
+            "Queues": [ 
+              {
+                "Name": "queue.1",
+                "Properties": {
+                  "DeadLetteringOnMessageExpiration": false,
+                  "DefaultMessageTimeToLive": "PT1H",
+                  "DuplicateDetectionHistoryTimeWindow": "PT20S",
+                  "ForwardDeadLetteredMessagesTo": "",
+                  "ForwardTo": "",
+                  "LockDuration": "PT1M",
+                  "MaxDeliveryCount": 3,
+                  "RequiresDuplicateDetection": false,
+                  "RequiresSession": false
+                }
+              }
+            ],
+            "Topics": [ ]
+          }
+        ],
+        "Logging": {
+          "Type": "Console"
+        }
+      }
+    }
+  

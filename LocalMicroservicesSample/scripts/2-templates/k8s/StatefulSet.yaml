@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {appName}-deployment
+  namespace: ${namespace}
+  labels:
+    app: {appName}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {appName}
+  template:
+    metadata:
+      labels:
+        app: {appName}
+    spec:
+      volumes:
+      - name: otelcol-config
+        configMap:
+          name: {appName}-otelcol-config
+      - name: {appName}-config
+        configMap:
+          name: {appName}-appsettings-configmap
+      initContainers:
+{dbInitContainer}
+      - name: otelcol
+        image: otel/opentelemetry-collector-contrib:0.111.0
+        restartPolicy: Always
+        volumeMounts:
+        - name: otelcol-config
+          subPath: otelcol-config.yaml
+          mountPath: /etc/otelcol-contrib/config.yaml
+      containers:
+      - name: {appName}
+        image: demo-{appName}
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: {appName}-config
+          subPath: appsettings.Development.json
+          mountPath: /app/appsettings.Development.json
+        env:
+        - name: DOTNET_Environment
+          value: "Development"
+{dbEnvVariables}

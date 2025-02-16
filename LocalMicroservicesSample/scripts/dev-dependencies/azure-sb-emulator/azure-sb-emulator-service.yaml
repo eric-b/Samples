@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: azure-sb-emulator-service
+  namespace: ${namespace}
+  labels:
+    app.kubernetes.io/name: azure-sb-emulator
+spec:
+  selector:
+    app.kubernetes.io/name: azure-sb-emulator
+  type: ClusterIP
+  ports:
+  - name: sb-amqp
+    port: 5672
+    protocol: TCP
+    targetPort: sb-amqp

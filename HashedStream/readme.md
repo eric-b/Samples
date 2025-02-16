@@ -1,1 +1,1 @@
-See blog post (in french): http://blog.eric-bml.net/hashed-stream
+See blog post (in french): https://blog.eric-bml.net/dev/calcul-de-hachage-pendant-la-lecture-dun-fichier

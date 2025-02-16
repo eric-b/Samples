@@ -1,0 +1,6 @@
+@Demo.Api1_HostAddress = http://localhost:5110
+
+GET {{Demo.Api1_HostAddress}}/swagger/
+Accept: text/html
+
+###

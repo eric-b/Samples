@@ -1,1 +1,1 @@
-Blog post (in french) : http://blog.eric-bml.net/action-filter-attributes-et-ioc
+Blog post (in french) : https://blog.eric-bml.net/dev/action-filter-attributes-et-ioc

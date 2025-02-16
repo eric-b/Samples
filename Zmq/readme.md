@@ -1,1 +1,1 @@
-Samples of blog post http://blog.eric-bml.net/zeromq-une-intro-a-0mq (in french).
+Samples of blog post (in french): https://blog.eric-bml.net/dev/zeromq-une-intro-a-0mq

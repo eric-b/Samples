@@ -7,4 +7,4 @@ Illustrates :
 
 LDAP client and Identity UserStore are fakes.
 
-Blog article (in french): http://blog.eric-bml.net/authentification-ldap-et-cookie-partage-entre-applications-webhost-et-selfhost-avec-aspnet-identity
+Blog article (in french): https://blog.eric-bml.net/dev/authentification-ldap-et-cookie-partage-entre-deux-applications-webhost-selfhost/

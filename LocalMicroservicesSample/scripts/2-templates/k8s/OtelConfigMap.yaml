@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {appName}-otelcol-config
+  namespace: ${namespace}
+  labels:
+    app.kubernetes.io/name: {appName}
+data:
+  otelcol-config.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: localhost:4317
+          http:
+            endpoint: localhost:4318
+
+    exporters:
+      debug:
+      otlp/signoz:
+        endpoint: "http://signoz-otel-collector.apm:4317"
+        tls:
+          insecure: true
+        sending_queue:
+          num_consumers: 4
+          queue_size: 100
+        retry_on_failure:
+          enabled: true
+      otlphttp/prometheus:
+        endpoint: "http://prometheus-service.dev-dependencies:9090/api/v1/otlp"
+        metrics_endpoint: "http://prometheus-service.dev-dependencies:9090/api/v1/otlp/v1/metrics"
+        tls:
+          insecure: true
+        sending_queue:
+          num_consumers: 1
+          queue_size: 100
+        retry_on_failure:
+          enabled: true
+
+    processors:
+      batch:
+
+      memory_limiter:
+        # 80% of maximum memory up to 2G
+        limit_mib: 400
+        # 25% of limit up to 2G
+        spike_limit_mib: 100
+        check_interval: 5s
+
+      resource:
+        attributes:
+        - key: env
+          value: "{env}"
+          action: upsert
+        - key: service
+          value: "{appName}-app"
+          action: upsert
+        - key: version
+          value: "1"
+          action: upsert
+
+    extensions:
+      zpages: {}
+
+    service:
+      extensions: [zpages]
+      pipelines:
+        metrics:
+          receivers: [otlp]
+          processors: [memory_limiter, resource, batch]
+          exporters: [otlphttp/prometheus, otlp/signoz]
+        traces:
+          receivers: [otlp]
+          processors: [memory_limiter, resource, batch]
+          exporters: [otlp/signoz]
+        logs:
+          receivers: [otlp]
+          processors: [memory_limiter, resource, batch]
+          exporters: [otlp/signoz]
