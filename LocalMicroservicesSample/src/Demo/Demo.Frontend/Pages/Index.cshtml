@@ -1,0 +1,13 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <form asp-page-handler="trigger" method="post">
+        <button class="btn btn-default link-primary">Trigger</button>
+    </form>
+</div>

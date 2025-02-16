@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-sb-emulator-deployment
+  namespace: ${namespace}
+  labels:
+    app.kubernetes.io/name: azure-sb-emulator
+  annotations:
+    configmap.reloader.stakater.com/reload: "azure-sb-emulator-config"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: azure-sb-emulator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: azure-sb-emulator
+    spec:
+      initContainers:
+      - name: init-wait-sqlserver
+        image: alpine:3
+        imagePullPolicy: IfNotPresent
+        command: ["sh", "-c", "for i in $(seq 1 300); do nc -zvw1 host.docker.internal 1433 && exit 0 || sleep 3; done; exit 1"]
+      volumes:
+      - name: azure-sb-emulator-config
+        configMap:
+          name: azure-sb-emulator-config
+      containers:
+      - name: azure-sb-emulator
+        image: "mcr.microsoft.com/azure-messaging/servicebus-emulator:1.0.1"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: sb-amqp
+          containerPort: 5672
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /ServiceBus_Emulator/ConfigFiles/Config.json
+          name: azure-sb-emulator-config
+          subPath: config.json
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SQL_SERVER
+          value: host.docker.internal
+        - name: MSSQL_SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: azure-sb-emulator-sql-secret
+              key: MSSQL_SA_PASSWORD

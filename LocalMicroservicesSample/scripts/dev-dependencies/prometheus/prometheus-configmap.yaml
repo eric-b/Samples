@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-configmap
+  namespace: ${namespace}
+  labels:
+    name: prometheus-configmap
+data:
+  prometheus.yml: |-
+    # See https://prometheus.io/docs/prometheus/latest/getting_started/
+    global:
+      scrape_interval: 20s
+      evaluation_interval: 20s
+    storage:
+      tsdb:
+        # See https://prometheus.io/docs/guides/opentelemetry/#enable-out-of-order-ingestion
+        out_of_order_time_window: 30m
+    scrape_configs:
+      - job_name: 'prometheus'
+        scheme: http
+        static_configs:
+          - targets: ['localhost:9090']

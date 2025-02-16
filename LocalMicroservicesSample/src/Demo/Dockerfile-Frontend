@@ -1,0 +1,39 @@
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /source
+
+############ SONAR INITIALIZATION ############
+
+RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y openjdk-17-jre
+
+RUN dotnet tool install --global dotnet-sonarscanner --version 9.1.0
+
+ENV PATH="${PATH}:/root/.dotnet/tools"
+
+ARG SONAR_HOST
+ARG SONAR_PRJ_KEY
+ARG SONAR_TOKEN
+
+RUN dotnet sonarscanner begin \
+	/k:"$SONAR_PRJ_KEY" \
+	/d:sonar.host.url="$SONAR_HOST" \
+	/d:sonar.token="$SONAR_TOKEN" \
+    /d:sonar.projectBaseDir="/source"
+
+############ SONAR INITIALIZATION ############
+
+COPY ./Demo.Infrastructure.OpenTelemetry /Demo.Infrastructure.OpenTelemetry
+COPY ./Demo.Frontend /source
+
+RUN dotnet restore /source
+
+RUN dotnet publish /source -c release -o /app --no-restore
+
+############ SONAR END #######################
+RUN dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
+############ SONAR END #######################
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+COPY --from=build /app ./
+ENTRYPOINT ["dotnet", "Demo.Frontend.dll"]

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {appName}-appsettings-configmap
+  namespace: ${namespace}
+  labels:
+    app.kubernetes.io/name: {appName}
+data:
+  appsettings.Development.json: |
+{appSettings}

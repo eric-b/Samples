@@ -7,4 +7,4 @@ Illustrates :
 * Client for ASP.NET threading-model (factory of inproc Req sockets).
 * Cluster of Rep sockets, server side (see Tests/ServerClusterTest.cs).
 
-Blog article (in french): http://blog.eric-bml.net/implementation-du-pattern-zmq-request-reply-avec-un-client-asp-net
+Blog article (in french): https://blog.eric-bml.net/dev/implementation-du-pattern-zmq-request-reply-avec-un-client-asp-net

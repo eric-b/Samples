@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azurite-deployment
+  namespace: ${namespace}
+  labels:
+    app: azurite
+spec:
+  selector:
+    matchLabels:
+      app: azurite
+  template:
+    metadata:
+      labels:
+        app: azurite
+    spec:
+      volumes:
+      - name: azurite-persistent-storage
+        hostPath:
+            # WSL2 path "/mnt/c" is mapped to 
+            # "/run/desktop/mnt/host/c" when running in Docker VM (where containers run)
+            path: '${AZURITE_HOST_PATH}'
+      containers:
+      # See https://hub.docker.com/r/microsoft/azure-storage-azurite
+      - image: mcr.microsoft.com/azure-storage/azurite:3.33.0
+        imagePullPolicy: IfNotPresent
+        name: azurite
+        command: ["azurite", "-l", "/workspace", "--blobHost", "0.0.0.0", "--loose", "--skipApiVersionCheck", "--disableProductStyleUrl" ]
+        ports:
+        - containerPort: 10000
+          name: blob
+        volumeMounts:
+        - name: azurite-persistent-storage
+          mountPath: /workspace

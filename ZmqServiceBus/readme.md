@@ -1,1 +1,1 @@
-Samples of blog post http://blog.eric-bml.net/zmq-creation-d-un-service-bus-ipc-avec-0mq (in french).
+Samples of blog post (in french): https://blog.eric-bml.net/dev/zmq-creation-dun-service-bus-ipc-avec-0mq/

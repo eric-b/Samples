@@ -1,1 +1,1 @@
-Blog post (in french) : http://blog.eric-bml.net/chiffrement-dun-apicontroller-avec-rsa-et-rijndael-via-actionfilter
+Blog post (in french) : https://blog.eric-bml.net/dev/chiffrement-dun-apicontroller-avec-rsa-et-rijndael-via-actionfilter
